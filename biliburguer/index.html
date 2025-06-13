@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bili Burguer</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #FFF7D9;
+      color: #fff;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .lanche {
+      background: #941505;
+      color: #F3D495;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .lanche img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .lanche h2 {
+      font-size: 22px;
+      color:#F3D495(33 30% 4%);
+      margin-bottom: 8px;
+    }
+
+    .lanche p {
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .lanche label {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 6px;
+      text-align: left;
+    }
+
+    .btn {
+      margin-top: 30px;
+      background-color: #22f40b;
+      color: rgb(4, 7, 4);
+      border: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #fdfbfb;
+    }
+
+    #extrato {
+      margin-top: 40px;
+      background: #f2f5f3;
+      color: #333;
+      padding: 20px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    #extrato h3 {
+      margin-bottom: 15px;
+      color: #20ea09;
+    }
+
+    #extrato ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    #extrato li {
+      margin-bottom: 6px;
+    }
+
+    #extrato p {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .logo {
+      width: 200px;
+      height: auto;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+   <img src="Logo.png" alt="Logo Bili Burguer" class="logo">
+   </header>
+
+  <form id="pedidoForm">
+    <div class="menu">
+      <div class="lanche">
+        <img src="SmashBurguer.png" alt="Smash Burguer">
+        <h2>Smash Burguer</h2>
+        <p>Pão, carne smash, queijo derretido e molho da casa.</p>
+        <label><input type="checkbox" name="lanche" value="Smash Burguer|15"> Somente Lanche (R$ 15)</label>
+        <label><input type="checkbox" name="lanche" value="Combo Smash Burguer|22"> Combo (R$ 22)</label>
+      </div>
+
+      <div class="lanche">
+        <img src="SmashDuplo.png" alt="Smash Duplo">
+        <h2>Smash Duplo</h2>
+        <p>Dois hambúrgueres smash com queijo e molho especial.</p>
+        <label><input type="checkbox" name="lanche" value="Smash Duplo|20"> Somente Lanche (R$ 20)</label>
+        <label><input type="checkbox" name="lanche" value="Combo Smash Duplo|27"> Combo (R$ 27)</label>
+      </div>
+
+      <div class="lanche">
+        <img src="SmashTriplo.png" alt="Smash Triplo">
+        <h2>Smash Triplo</h2>
+        <p>Três carnes smash suculentas com queijo e muito sabor.</p>
+        <label><input type="checkbox" name="lanche" value="Smash Triplo|25"> Somente Lanche (R$ 25)</label>
+        <label><input type="checkbox" name="lanche" value="Combo Smash Triplo|32"> Combo (R$ 32)</label>
+      </div>
+
+      <div class="lanche">
+        <img src="SmashCebola.png" alt="Smash Onion">
+        <h2>Smash Onion</h2>
+        <p>Carne smash com cebola crispy, queijo e molho da casa.</p>
+        <label><input type="checkbox" name="lanche" value="Smash Onion|18"> Somente Lanche (R$ 18)</label>
+        <label><input type="checkbox" name="lanche" value="Combo Smash Onion|25"> Combo (R$ 25)</label>
+      </div>
+
+      <div class="lanche">
+        <img src="SmashBatata.png" alt="Smash Batata">
+        <h2>Smash Batata</h2>
+        <p>Burguer com camada de batata chips e queijo cheddar.</p>
+        <label><input type="checkbox" name="lanche" value="Smash Batata|19"> Somente Lanche (R$ 19)</label>
+        <label><input type="checkbox" name="lanche" value="Combo Smash Batata|26"> Combo (R$ 26)</label>
+      </div>
+    </div>
+
+    <button type="button" class="btn" onclick="gerarExtrato()">Gerar Extrato</button>
+  </form>
+
+  <div id="extrato"></div>
+
+  <script>
+    function gerarExtrato() {
+      const checkboxes = document.querySelectorAll('input[name="lanche"]:checked');
+      let extrato = "<h3>Resumo do Pedido:</h3><ul>";
+      let total = 5; // Taxa de entrega
+
+      checkboxes.forEach(cb => {
+        const [nome, preco] = cb.value.split('|');
+        extrato += `<li>${nome} - R$ ${parseFloat(preco).toFixed(2)}</li>`;
+        total += parseFloat(preco);
+      });
+
+      extrato += `</ul><p><strong>Taxa de entrega:</strong> R$ 5,00</p>`;
+      extrato += `<p><strong>Total:</strong> R$ ${total.toFixed(2)}</p>`;
+
+      document.getElementById("extrato").innerHTML = extrato;
+    }
+  </script>
+
+</body>
+</html>
